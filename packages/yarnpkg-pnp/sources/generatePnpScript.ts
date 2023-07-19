@@ -41,8 +41,9 @@ function generateInlinedSetup(data: SerializedState) {
 function generateSplitSetup(dataLocation: string) {
   return [
     `var path = require('path');\n`,
+    `var fs = require('fs');\n`,
     `var dataLocation = path.resolve(__dirname, ${JSON.stringify(dataLocation)});\n`,
-    `return hydrateRuntimeState(require(dataLocation), {basePath: basePath || path.dirname(dataLocation)});\n`,
+    `return hydrateRuntimeState(JSON.parse(fs.readFileSync(dataLocation, 'utf8')), {basePath: basePath || path.dirname(dataLocation)});\n`,
   ].join(``);
 }
 

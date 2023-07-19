@@ -57,6 +57,8 @@ export function makeManager(pnpapi: PnpApi, opts: MakeManagerOptions) {
   }
 
   function getApiEntry(pnpApiPath: PortablePath, refresh = false) {
+    // Ensure we only instantiate potentially simlynked PnP API module once
+    pnpApiPath = opts.fakeFs.realpathSync(pnpApiPath);
     let apiEntry = apiMetadata.get(pnpApiPath);
 
     if (typeof apiEntry !== `undefined`) {

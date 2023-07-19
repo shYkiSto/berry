@@ -51842,6 +51842,7 @@ function makeManager(pnpapi, opts) {
     }
   }
   function getApiEntry(pnpApiPath, refresh = false) {
+    pnpApiPath = opts.fakeFs.realpathSync(pnpApiPath);
     let apiEntry = apiMetadata.get(pnpApiPath);
     if (typeof apiEntry !== `undefined`) {
       if (refresh) {
